@@ -67,11 +67,12 @@ startGameBtn.addEventListener("click", () => {
   console.log(computerChoice);
   let gameWinner;
   if (playerChoice) {
-    gameWinner = getWinner (playerChoice, computerChoice);
+    gameWinner = getWinner(playerChoice, computerChoice);
   } else {
-    gameWinner = getWinner (playerChoice, computerChoice)
+    gameWinner = getWinner(playerChoice, computerChoice);
   }
-  let finalMessage = `You picked ${playerChoice || DEFAULT_USER_CHOICE}, computer picked ${computerChoice}, therefore you `;
+  let finalMessage = `You picked ${playerChoice ||
+    DEFAULT_USER_CHOICE}, computer picked ${computerChoice}, therefore you `;
   if (gameWinner === RESULT_DRAW) {
     message = finalMessage + "had a draw!";
   } else if (gameWinner === PLAYER_WINNER) {
@@ -79,6 +80,27 @@ startGameBtn.addEventListener("click", () => {
   } else {
     message = finalMessage + "lose.";
   }
-  console.log (message);
+  console.log(message);
   gameIsRunning = false;
 });
+
+const sumUp = (resultHandler, ...numbers) => {
+  const validateNumber = (number) => {
+    return isNaN(number) ? 0 : number;
+  };
+
+
+  let sum = 0;
+  for (const num of numbers) {
+    sum += validateNumber(num);
+  } 
+  resultHandler(sum);
+};
+
+
+const showResult = (result) => {
+  alert ('The result after adding all numbers is: ' + result)
+};
+
+
+console.log (sumUp(showResult,1005,'ss',-1000,22,86))
