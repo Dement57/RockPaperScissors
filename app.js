@@ -84,23 +84,25 @@ startGameBtn.addEventListener("click", () => {
   gameIsRunning = false;
 });
 
-const sumUp = (resultHandler, ...numbers) => {
-  const validateNumber = (number) => {
+const combine = (resultHandler, operation, ...numbers) => {
+  const validateNumber = number => {
     return isNaN(number) ? 0 : number;
   };
 
-
   let sum = 0;
   for (const num of numbers) {
-    sum += validateNumber(num);
-  } 
-  resultHandler(sum);
+    if (operation === "ADD") {
+      sum += validateNumber(num);
+    } else {
+      sum -= validateNumber(num);
+    }
+  }
+  resultHandler(sum, "The result after adding all numbers is: ");
 };
 
-
-const showResult = (result) => {
-  alert ('The result after adding all numbers is: ' + result)
+const showResult = (messageText, result) => {
+  alert(messageText + " " + result);
 };
 
-
-console.log (sumUp(showResult,1005,'ss',-1000,22,86))
+combine(showResult.bind(this,'The result after adding all numbers is: '), "ADD", 1005, -1000, 22, 86);
+combine(showResult.bind(this,'The result after subtracting all numbers is: '), "SUBTRACT", 105, -1000, 22, 86);
